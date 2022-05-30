@@ -1,0 +1,77 @@
+{%  load static %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Meninos da Vila</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Meninos da Vila</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar"
+            aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="textoNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/catalogo">Catálogo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/agendamento">Agendamento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contato</a>
+                </li>              
+            </ul>            
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 50px;">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Sair</a></li> 
+                {% else %}             
+                <li class="nav-item"><a style="margin-right: 30px;" class="nav-link" href="{% url 'login' %}">Entrar</a></li> 
+                <li class="dropdown">
+                  <a class="navbar-text" data-toggle="dropdown" style="margin-right: 50px;" 
+                   href="#" id="textoNavbar">Área Restrita</a>
+                  <ul class="dropdown-menu navbar-dark bg-dark">
+                    <li><a class="dropdown-item" href="{% url 'accounts:register' %}">Cadastrar usuário</a></li>                  
+                    <li><a class="dropdown-item" href="{% url 'accounts:index' %}">Alterar dados usuário</a></li>                  
+                  </ul>
+                </li> 
+                {% endif %}          
+            </ul>
+        </div>        
+    </nav>
+    {% block content %}{% endblock %}  
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/javascript.js' %}"></script>
+</body>
+
+</html>
