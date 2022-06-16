@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+ 
+{% for cliente in clientes %}
+
+
+   <div class="card sc-client-item" style="margin-left: 500px; margin-top: 10px;">
+        <img class="card-img-top" data-name="client_image" src="{% if cliente.imagem == 'imagem' or cliente.imagem == '' %} {% static 'images/download.svg' %} {% else %} /media/{{ cliente.imagem }} {% endif %}" style="width: 348px; height: 224px;">
+        <div class="card-body">
+            <h5 class="card-title" data-name="client_name">{{ cliente.nome }}</h5>
+            <p class="card-text price" name="client_valor" value="{{ cliente.valor }}"><small class="text-muted">Valor: R${{ cliente.valor }}</small></p>
+            <p class="card-text price" name="client_horario" value="{{ cliente.horario }}"><small class="text-muted">Horário: {{ cliente.horario }}</small></p>
+            <input name="client_price" value="{{ cliente.valor }}" type="hidden" />
+            <input name="client_id" value="{{ cliente.id }}" type="hidden" />
+            <div style="margin-left: -20px;">
+                <a href="{% url 'addclient' %}" class="sc-add-to-cart btn btn-primary">Cadastrar</a>   
+                <a href="{% url 'updateclient' cliente.id %}" class="sc-add-to-cart btn btn-primary">Editar</a>
+                <a href="{% url 'clientdetail' cliente.id %}" class="sc-add-to-cart btn btn-info">Detalhes</a>
+                <a href="{% url 'deleteclient' cliente.id %}" class="sc-add-to-cart btn btn-danger">Deletar</a>                             
+            </div>
+        </div>
+    </div> 
+
+ 
+
+{% endfor %}
+
+</div>
+
+
+
+{% endblock %}

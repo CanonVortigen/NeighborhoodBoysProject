@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="jumbotron" style="margin-left: 200px; margin-top: 10px;">
+        <h4 class="display-4">Nome: {{ detalhes.nome }}</h4>
+        <p class="lead"> Descrição: {{ detalhes.descricao }}</p>
+        <img src="{% if detalhes.imagem == 'imagem' or detalhes.imagem == '' %} {% static 'images/download.svg' %} {% else %} /media/{{ detalhes.imagem }} {% endif %}" width="200" height="200">
+        <p>Valor: {{ detalhes.valor }}</p>
+        <p>Horário: {{ detalhes.horario }}</p>
+        <a href="{% url 'updateclient' detalhes.id %}" class="sc-add-to-cart btn btn-primary">Editar</a>
+    </div>
+
+{% endblock %}

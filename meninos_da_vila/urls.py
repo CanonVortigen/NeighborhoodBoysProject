@@ -20,6 +20,10 @@ from django.urls import path
 from app import views
 from django.contrib.auth.views import LoginView, LogoutView
 from app.views import CatalogoList, agendamento, CatalogoCreate
+from agenda.views import CadastarCliente, DeletarCliente, DetalhesCliente, EditarCliente, HomePage
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^$', views.index, name="index"),     
@@ -28,9 +32,14 @@ urlpatterns = [
     url(r'^sair/$', LogoutView.as_view(next_page = 'index'), name='logout'),    
     url(r'^conta/', include('accounts.urls', namespace='accounts')),  
     path('catalogo',CatalogoList.as_view(),name='catalogo'),
-    path('catalogo/create/',CatalogoCreate.as_view(),name='catalogo-create'),
-    path('agendamento',agendamento,name='agendamento'), 
+    path('catalogo/create/', CatalogoCreate.as_view(), name='catalogo-create'),
+    path('agendamento', agendamento, name='agendamento'),
+    path('home/', HomePage, name='homepage'),
+    path('cadastrar-cliente/', CadastarCliente, name='addclient'),
+    path('editar-cliente/<int:pk>', EditarCliente, name='updateclient'),
+    path('detalhes-cliente/<int:pk>', DetalhesCliente, name='clientdetail'),
+    path('deletar-cliente/<int:pk>', DeletarCliente, name='deleteclient'),
     url(r'^admin/', admin.site.urls),    
    
 
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
