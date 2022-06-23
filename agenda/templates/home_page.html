@@ -6,7 +6,7 @@
 {% for cliente in clientes %}
 
 
-   <div class="card sc-client-item" style="margin-left: 500px; margin-top: 10px;">
+   <div class="col-3">
         <img class="card-img-top" data-name="client_image" src="{% if cliente.imagem == 'imagem' or cliente.imagem == '' %} {% static 'images/download.svg' %} {% else %} /media/{{ cliente.imagem }} {% endif %}" style="width: 348px; height: 224px;">
         <div class="card-body">
             <h5 class="card-title" data-name="client_name">{{ cliente.nome }}</h5>
